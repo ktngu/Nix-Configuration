@@ -99,10 +99,11 @@
    #programs 
     #obsidian
     #vscode
-    git
+    git 
+    gh
     brave 
   ];
-
+ { nixpkgs.config.allowUnfree = true; }
   #nixpkgs.config.allowUnfree = (pkg: true);
 # nixpkg.config = {
 # allowUnfree = true;
