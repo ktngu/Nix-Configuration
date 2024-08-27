@@ -2,14 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  user,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -51,8 +51,10 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
 
   # Enable CUPS to print documents.
@@ -79,36 +81,35 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.ktngu = {
+  users.users.${user} = {
     isNormalUser = true;
     description = "Kevin Nguyen";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       firefox
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
-  
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-   #util 
+    # util
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-   #programs 
-    #obsidian
-    #vscode
-    git 
-    gh
-    brave 
-  ];
- { nixpkgs.config.allowUnfree = true; }
-  #nixpkgs.config.allowUnfree = (pkg: true);
-# nixpkg.config = {
-# allowUnfree = true;
-#} 
 
+    # programs
+    obsidian
+    vscode
+    git
+    gh
+    brave
+  ];
+
+  nixpkgs.config.allowUnfree = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -135,6 +136,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
-
+  system.stateVersion = "24.05"; # Did you read the comment?
 }
