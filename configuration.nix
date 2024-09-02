@@ -81,7 +81,8 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${user} = {
+    users.users.${user} = {
+    #users.users.ktngu = {
     isNormalUser = true;
     description = "Kevin Nguyen";
     extraGroups = [
@@ -100,13 +101,20 @@
     # util
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    git
+    gh
+    kitty
+    #nemo
+    neofetch
+
 
     # programs
     obsidian
     vscode
-    git
-    gh
     brave
+    discord
+
+
   ];
 
   nixpkgs.config.allowUnfree = true;
