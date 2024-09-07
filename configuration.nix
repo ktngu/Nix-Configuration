@@ -79,6 +79,10 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+  # New ThinkPads have a different TrackPoint manufacturer/name.
+  # See also https://certification.ubuntu.com/catalog/component/input/5313/input%3ATPPS/2ElanTrackPoint/
+  hardware.trackpoint.device = "TPPS/2 Elan TrackPoint";
+
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.${user} = {
